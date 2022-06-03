@@ -1,0 +1,9 @@
+# Specify the input file
+# Please write only the file name
+#-----------------------------------------
+# File name of Property file (In property)
+ni.txt
+# File name of Prameter file (In pram)
+param_1.txt
+# File name of outdata file (In outdata)
+outdata_1.txt

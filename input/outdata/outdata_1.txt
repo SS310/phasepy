@@ -1,0 +1,18 @@
+# This file determine the output file settings.
+# When outputting a file : 0, Not : 1, 
+# ( Not 0 or 1 -> Not outputting )
+# ----------------------------------------------
+# 0. (Image) Phase field function
+0
+# 1. (NPY) Phase field function
+0
+# 2. (Image) Temperature field
+0
+# 3. (NPY) Temperature field
+0
+# 4. (NPY) Thermal fluctuations
+0
+# 5. (NPY) Chemical energy
+0
+# 6. (NPY) Gradient energy
+0
