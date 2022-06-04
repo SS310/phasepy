@@ -5,15 +5,16 @@
 
 > TDGL equation
 
-```math
-\frac{\partial \phi}{\partial t} = - M_{\phi} \left ( \frac{\partial G_{sys}}{\partial \phi} + \xi\right )
-```
-
-```math
-G_{sys} :  \textrm{Free\ Energy}
-\\
-\xi :  \textrm{Thermal\ Fluctuation}
-```
+<div align="center">
+<img src="https://latex.codecogs.com/svg.image?\frac{\partial&space;\phi}{\partial&space;t}&space;=&space;-&space;M_{\phi}&space;\left&space;(&space;\frac{\partial&space;G_{sys}}{\partial&space;\phi}&space;&plus;&space;\xi\right&space;)" alt="tdgl" title="tdgl">
+</div>
+<div align="right">
+<img src="https://latex.codecogs.com/svg.image?G_{sys}\&space;{:}&space;\&space;\textrm{Free\&space;Energy}" alt="ene" title="ene">
+</div>
+<div align="right">
+<img src="https://latex.codecogs.com/svg.image?\xi\&space;{:}&space;\&space;\textrm{Thermal\&space;Fluctuation}" alt="fluct" title="fluct">
+</div>
+<br>
 
 ||||||
 |-|-|-|-|-|
