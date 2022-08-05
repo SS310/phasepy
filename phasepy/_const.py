@@ -1,67 +1,148 @@
 """
 Summary
 -------
-Module on Constant
+Main constant value is written in this file.
 
-Update log
-----------
-At the final update date : 2022/06/03
+See Also
+--------
+
 """
 
 #********** Import major pakage or module **********
 import math
 import os
 
-#********** Import orizinal module **********
+#********** Class **********
 
-#********** Constant Value **********
+
+#***** Math constant *****
+
 class MathConst():
-    def __init__(self) -> None:
-        self.PI = math.pi
-        self.R_GAS = 8.3145
-        self.WHITE_NUM = 255
+    """
+    Math constant
+    """
+    PI: float = math.pi
+    """pi ( 3.14... )"""
+    R_GAS: float= 8.3145
+    """Gas constant"""
+    WHITE_NUM: int = 255
+    """MAX 8-bit data using white area for image"""
+    MU0: float = 4.0*PI*1e-7
+    """Permeability of vacuum"""
 
-class FileNam():
-    def __init__(self) -> None:
-        self.SET = "setting.txt"
-
+#***** Constant about directry or file name *****
 class DirNam():
-    def __init__(self) -> None:
-        self.PYTHON = "phasepy"
-        self.INPUT = "input"
-        self.OUTPUT = "output"
-        self.PROPERTY = "property"
-        self.PARAM = "param"
-        self.OUTDATA = "outdata"
+    INFO = ".info"
+    """Information directry"""
 
-class OutDirNam():
-    def __init__(self) -> None:
-        self.COND_NAM = "condition"
-        self.SIMU_NAM = "simulation_"
-        self.PHASE_IMG_NAM = "phase_img"
-        self.PHASE_NPY_NAM = "phase_npy"
-        self.TEM_IMG_NAM = "tem_img"
-        self.TEM_NPY_NAM = "tem_npy"
-        self.TEM_FLUCT_NAM = "fluct_npy"
-        self.CHEM_ENE_NAM = "chem_npy"
-        self.GRAD_ENE_NAM = "grad_npy"
+class PathConst():
+    PACKAGE = os.path.abspath(os.path.dirname(__file__))
+    """PATH of this package"""
     
-    @property
-    def OUT_DIR_LIST(self) -> list:
-        return [self.PHASE_IMG_NAM, self.PHASE_NPY_NAM, self.TEM_IMG_NAM,
-                self.TEM_NPY_NAM, self.TEM_FLUCT_NAM, self.CHEM_ENE_NAM, self.GRAD_ENE_NAM]
+    __DENDRITE = "dendrite"
+    __MARTENSITE = "martensite"
+    __FSMA = "fsma"
 
-class MainPath():
-    def __init__(self) -> None:
-        self.MAIN_PATH = os.path.split(os.path.dirname(os.path.abspath(__file__)))[0]
-        self.PYTHON_PATH = os.path.join(self.MAIN_PATH, DirNam().PYTHON)
-        self.INPUT_PATH = os.path.join(self.MAIN_PATH, DirNam().INPUT)
-        self.OUTPUT_PATH = os.path.join(self.MAIN_PATH, DirNam().OUTPUT)
-        
-class InputPath(MainPath):
-    def __init__(self) -> None:
-        super().__init__()
-        self.SET_PATH = os.path.join(self.INPUT_PATH, FileNam().SET) 
-        self.PROPERTY_PATH = os.path.join(self.INPUT_PATH, DirNam().PROPERTY)    
-        self.PARAM_PATH = os.path.join(self.INPUT_PATH, DirNam().PARAM)
-        self.OUTDATA_PATH = os.path.join(self.INPUT_PATH, DirNam().OUTDATA) 
+    class __ModelPath():
+        def __init__(self, model: str, PAKCAGE: str) -> None:
+            self.DATA = os.path.join(PAKCAGE, model , "data")
+            """PATH of format file for dendrite simulation"""
+            self.VALUE = os.path.join(PAKCAGE, model, "variable", "define", "_var.py")
+            """PATH of variable definition file for dendrite simulation"""
+            self.MODEL = os.path.join(PAKCAGE, model, "variable", "define", "_model.py")
+            """PATH of variable definition file for dendrite simulation"""
+
+    DENDRITE = __ModelPath(model=__DENDRITE, PAKCAGE=PACKAGE)
+    """PATH for dendrite simulation"""
+    MARTENSITE = __ModelPath(model=__MARTENSITE, PAKCAGE=PACKAGE)
+    """PATH for martensite simulation"""
+    FSMA = __ModelPath(model=__FSMA, PAKCAGE=PACKAGE)
+    """PATH for martensite simulation"""
+
+
+#***** Constant about dictionary key*****
+class SetPathKey():
+    MAIN = "main"
+    """Key of counter"""
+    OUTPUT = "output_path"
+    """Key of output-path"""
+    INPUT = "input_path"
+    """Key of input-path"""
+
+class InputDataKey():
+    DESCRIPTION = "description"
+    """Key of variable description"""
+    TYPE = "type"
+    """Key of variable type"""
+    UNIT = "unit"
+    """Key of variable unit"""
+    VALUE = "value"
+    """Key of variable value"""
+
+class InputNameKey():
+    """
+    Constants related to the name of the setting definition used in the dict type
+    """
+    SIMULATION_PARAMETER = "simulation_parameter"
+    """Key of simulation parameter"""
+    OUTPUT_PARAMETER = "output_parameter"
+    """Key of output parameter"""
+    MATERIAL_PROPERTY = "material_property"
+    """Key of material property"""
+    MODEL_PARAMETER = "model_parameter"
+    """Key of model prameter"""
+    
+
+class SimulationModelKey():
+    """
+    Key of All simulation model
+    """
+    CLASS_NAME = "class_name"
+    """Key of class name for each simulation model"""
+    DESCRIPTION = "description"
+    """Key of description for each simulation model"""
+
+    class __Dendrite():
+        """
+        Key of dendrite simulation model
+        """
+        def __init__(self, CLASS_NAME: str, DESCRIPTION: str) -> None:
+            """
+            Key of dendrite simulation model
+            """
+            self.PATH = PathConst.DENDRITE
+            """PATH for dendrite simulation"""
+            self.CENTER = {
+                CLASS_NAME: "Center",
+                DESCRIPTION: "This is a basic model in which a circular initial nucleus is generated in the center."
+            }
+    
+    class __Fsma():
+        """
+        Key of fsma simulation model
+        """
+        def __init__(self, CLASS_NAME: str, DESCRIPTION: str) -> None:
+            """
+            Key of fsma simulation model
+            """   
+            self.PATH = PathConst.FSMA
+            """PATH for fsma simulation"""
+
+
+    class __Martensite():
+        """
+        Key of martensite simulation model
+        """
+        def __init__(self, CLASS_NAME: str, DESCRIPTION: str) -> None:
+            """
+            Key of martensite simulation model
+            """   
+            self.PATH = PathConst.MARTENSITE
+            """PATH for martensite simulation"""
+    
+    DENDRITE = __Dendrite(CLASS_NAME=CLASS_NAME, DESCRIPTION=DESCRIPTION)
+    """Key of dendrite simulation model """
+    MARTENSITE = __Martensite(CLASS_NAME=CLASS_NAME, DESCRIPTION=DESCRIPTION)
+    """Key of dendrite simulation model """
+    FSMA = __Fsma(CLASS_NAME=CLASS_NAME, DESCRIPTION=DESCRIPTION)
+    """Key of dendrite simulation model """

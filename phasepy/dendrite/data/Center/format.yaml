@@ -1,0 +1,178 @@
+# This file can set all parameter of **Center** model
+# This is a basic model in which a circular initial nucleus is generated in the center.
+# You must set each value to change simulation environment
+# Setting example
+# ============================================================
+# Variable name
+#  1. Description for variable
+#  2. Value type
+#  3. Unit of measurement
+#  4. Value
+# ============================================================
+# ----- Example -----
+# exam_val:
+#  description: Example variables
+#  type: int
+#  unit: m/s
+#  value: 1
+# ============================================================
+#  !:types.i4=int32, i8=int64, f4=float32, f8=float64
+#  !:You can use <e+3> as a 10^3(e+3 = 1000, e-2=0.01, ...)
+#  !:bool type -> false or true
+# ============================================================
+# ============================================================
+# ============================================================
+# Please set **Center** model parameter according to above discription.
+# ============================================================
+model_parameter:
+  nucleus_size:
+    description: Initial nucleus radius (number of cells)
+    type: types.f8
+    unit: None
+    value: 10.0
+  nucleus_state:
+    description: Phase field variable value of the initial nucleus (0~1)
+    type: types.f8
+    unit: None
+    value: 0.9
+# ============================================================
+# ============================================================
+# Please set material property according to above discription.
+# ============================================================
+simulation_parameter:
+  maxstep:
+    description: Max step of simulation
+    type: types.i8
+    unit: None
+    value: 3000
+  savestep:
+    description: Decide how many times you get output
+    type: types.i4
+    unit: None
+    value: 100
+  xmax:
+    description: x of cell amount
+    type: types.i4
+    unit: None
+    value: 256
+  xsize:
+    description: x of cell size
+    type: types.f8
+    unit: m
+    value: 3.0e-08
+  ymax:
+    description: y of cell amount
+    type: types.i4
+    unit: None
+    value: 256
+  ysize:
+    description: y of cell size
+    type: types.f8
+    unit: m
+    value: 3.0e-08
+# ============================================================
+# ============================================================
+# Please set material property according to above discription.
+# ============================================================
+material_property:
+  anis_num:
+    description: Anisotropic number of directions
+    type: types.f8
+    unit: None
+    value: 4.0
+  anis_str:
+    description: Anisotropic strength
+    type: types.f8
+    unit: None
+    value: 0.01
+  inter_e:
+    description: Interface energy
+    type: types.f8
+    unit: J/m2
+    value: 0.37
+  inter_kine_coef:
+    description: Interface kinetic cofficient
+    type: types.f8
+    unit: m/Ks
+    value: 2.0
+  inter_w_coef:
+    description: Interface width (Factor for cell size)
+    type: types.f8
+    unit: None
+    value: 3.0
+  lam:
+    description: Lambda
+    type: types.f8
+    unit: None
+    value: 0.1
+  lat_heat:
+    description: Latent heat
+    type: types.f8
+    unit: J/m^3
+    value: 2350000000.0
+  melt_tem:
+    description: Melting point (Temperture)
+    type: types.f8
+    unit: K
+    value: 1728.0
+  nois:
+    description: Noise amplitude
+    type: types.f8
+    unit: None
+    value: 0.1
+  spec_heat:
+    description: Specific heat
+    type: types.f8
+    unit: J/Km^3
+    value: 5420000.0
+  supercool_tem:
+    description: Supercooling temperture
+    type: types.f8
+    unit: K
+    value: 1511.2
+  tem_cond:
+    description: Thermal conductivity
+    type: types.f8
+    unit: W/mK
+    value: 84.01
+# ============================================================
+# ============================================================
+# Determine the which variable you want.
+# When you want the variable : true, Not : false, 
+# ============================================================
+output_parameter:
+  chem_drive:
+    description: Chemical driving force
+    type: bool
+    unit: bool
+    value: false
+  chem_energy:
+    description: Chemical energy
+    type: bool
+    unit: bool
+    value: false
+  grad_drive:
+    description: Gradient driving force
+    type: bool
+    unit: bool
+    value: false
+  grad_energy:
+    description: Gradient energy
+    type: bool
+    unit: bool
+    value: false
+  phase_f:
+    description: Phase field variable
+    type: bool
+    unit: bool
+    value: false
+  tem_f:
+    description: Temperture field
+    type: bool
+    unit: bool
+    value: false
+  tem_fluct:
+    description: Thermal fluctuations
+    type: bool
+    unit: bool
+    value: false

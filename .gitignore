@@ -161,9 +161,17 @@ cython_debug/
 
 
 #Adding
+*.ipynb
+*.png
 
-output/*
+!doc/**/*.ipynb
+!doc/**/*.png
 
-!input/**/*
-!output/.gitkeep
-!.image/*
+!data/*.png
+
+output/
+input/
+
+poetry.lock
+
+test.py
