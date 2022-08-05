@@ -138,7 +138,7 @@ Ex.)
 ```
 add: Add rules for git operations
 
-Added saome rule
+Added some rule
 - 1.How to write a commit message
 - 2.List of prefixes for commit
 - 3.How to write a pull request
@@ -207,6 +207,6 @@ category is like commits prefixes.
 ex) feature-xxx-..., release-xxx-..., hotfix-xxx-...
 
 - Add issue numbers as needed.
-`git branch category-xx-xxx#number`
+`git branch category-xx-xxx/#number`
 
 - Avoid long name
