@@ -164,7 +164,7 @@ See Also)
 |change|Specification Change|
 |clean|Organizing / Refactoring|
 |disable|Disable / Comment-out|
-|remove|Remove new files / functions|
+|remove|Remove files / functions|
 |upgrade|Upgrade version|
 |revert|Revert (Cancellation of changes)|
 |rename|Rename file|
