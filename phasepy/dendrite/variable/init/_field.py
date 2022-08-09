@@ -24,7 +24,7 @@ class InitField():
     class Temperture():
         def center(simu_val: SimuVal, prop_val: PropVal, cell_val: CellVal) -> None:
             """
-            Set initial conditions of temperture field for **Center** model
+            Set initial conditions of temperture field for **RoundCenter** model
             """
             for x in range(simu_val.xmax):
                 for y in range(simu_val.ymax):
@@ -32,9 +32,9 @@ class InitField():
 
 
     class Phase():
-        def round_center(simu_val: SimuVal, cell_val: CellVal, model_val: CenterModel) -> any:
+        def round_center(simu_val: SimuVal, cell_val: CellVal, model_val: RoundCenterModel) -> any:
             """
-            Set initial conditions of phase field variable for **Center** model
+            Set initial conditions of phase field variable for **RoundCenter** model
             """
             for x in range(simu_val.xmax):
                 for y in range(simu_val.ymax):
