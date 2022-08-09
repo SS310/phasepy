@@ -45,12 +45,12 @@ class RoundCenterModel():
         - default is the initial value of variable        
         - unit is physical units
         """
-        # SETTING-Center-START
+        # SETTING-RoundCenter-START
         self.nucleus_size: types.f8 = types.f8(model_parameter["nucleus_size"])
         """Initial nucleus radius (number of cells)""" # default=10, unit=None
         self.nucleus_state: types.f8 = types.f8(model_parameter["nucleus_state"])
         """Phase field variable value of the initial nucleus (0~1)""" # default=0.9, unit=None
-        # SETTING-Center-FINISH
+        # SETTING-RoundCenter-FINISH
         
         # -----------------------------------
         # Externally unconfigurable variables
