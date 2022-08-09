@@ -49,7 +49,7 @@ class WholeVal():
         self.cell_val: CellVal = CellVal(xmax=self.simu_val.xmax, ymax=self.simu_val.ymax)
 
         if self.__class_name == SimulationModelKey.DENDRITE.ROUND_CENTER[SimulationModelKey.CLASS_NAME]:
-            self.model_val = CenterModel(model_parameter=model_parametr)
+            self.model_val = RoundCenterModel(model_parameter=model_parametr)
 
     @property
     def outarr_list(self):
