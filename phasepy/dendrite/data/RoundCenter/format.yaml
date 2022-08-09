@@ -24,7 +24,17 @@
 # ============================================================
 # Please set **RoundCenter** model parameter according to above discription.
 # ============================================================
-model_parameter: {}
+model_parameter:
+  nucleus_size:
+    description: Initial nucleus radius (number of cells)
+    type: types.f8
+    unit: None
+    value: 10.0
+  nucleus_state:
+    description: Phase field variable value of the initial nucleus (0~1)
+    type: types.f8
+    unit: None
+    value: 0.9
 # ============================================================
 # ============================================================
 # Please set material property according to above discription.
