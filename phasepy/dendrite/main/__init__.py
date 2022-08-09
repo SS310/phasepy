@@ -1,2 +1,2 @@
 
-from .center import Center
+from .round_center import RoundCenter

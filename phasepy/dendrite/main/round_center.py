@@ -17,13 +17,13 @@ from ._base import Base
 
 #********** Class **********
 
-class Center(Base):
+class RoundCenter(Base):
     def __init__(self) -> None:
         super().__init__()
 
     def main(self):
         """
-        Start **Center** model simulation
+        Start **RoundCenter** model simulation
 
         See Also
         --------

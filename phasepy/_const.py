@@ -112,8 +112,8 @@ class SimulationModelKey():
             """
             self.PATH = PathConst.DENDRITE
             """PATH for dendrite simulation"""
-            self.CENTER = {
-                CLASS_NAME: "Center",
+            self.ROUND_CENTER = {
+                CLASS_NAME: "RoundCenter",
                 DESCRIPTION: "This is a basic model in which a circular initial nucleus is generated in the center."
             }
     

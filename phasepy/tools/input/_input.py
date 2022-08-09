@@ -40,7 +40,7 @@ class FmtFile():
         # Dendrite simulation
         value_path = SimulationModelKey.DENDRITE.PATH.VALUE
         model_path = SimulationModelKey.DENDRITE.PATH.MODEL
-        for model in [SimulationModelKey.DENDRITE.CENTER]:
+        for model in [SimulationModelKey.DENDRITE.ROUND_CENTER]:
             input_file_fmt = InputFileFmt(model=model)
             stamp_format = StampFormat(model=model)
 

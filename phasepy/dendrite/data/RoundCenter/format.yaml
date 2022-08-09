@@ -1,4 +1,4 @@
-# This file can set all parameter of **Center** model
+# This file can set all parameter of **RoundCenter** model
 # This is a basic model in which a circular initial nucleus is generated in the center.
 # You must set each value to change simulation environment
 # Setting example
@@ -22,7 +22,7 @@
 # ============================================================
 # ============================================================
 # ============================================================
-# Please set **Center** model parameter according to above discription.
+# Please set **RoundCenter** model parameter according to above discription.
 # ============================================================
 model_parameter:
   nucleus_size:

@@ -17,7 +17,7 @@ from numba import types, typed
 #********** Constant Value **********
 
 
-__all__ = ["CenterModel"]
+__all__ = ["RoundCenterModel"]
 
 #********** Class **********
 # ----------------------------------------------------------
@@ -27,13 +27,13 @@ spec1 = [
     ('nucleus_state', types.f8),
 ]
 @jitclass(spec=spec1)
-class CenterModel():
+class RoundCenterModel():
     """
     Variable about using only **Center** simulation
     """
     def __init__(self, model_parameter: typed.Dict) -> None:
         """
-        Variable about using only **Center** simulation
+        Variable about using only **RoundCenter** simulation
         """
         # Externally configurable variables
         """
@@ -45,12 +45,12 @@ class CenterModel():
         - default is the initial value of variable        
         - unit is physical units
         """
-        # SETTING-Center-START
+        # SETTING-RoundCenter-START
         self.nucleus_size: types.f8 = types.f8(model_parameter["nucleus_size"])
         """Initial nucleus radius (number of cells)""" # default=10, unit=None
         self.nucleus_state: types.f8 = types.f8(model_parameter["nucleus_state"])
         """Phase field variable value of the initial nucleus (0~1)""" # default=0.9, unit=None
-        # SETTING-Center-FINISH
+        # SETTING-RoundCenter-FINISH
         
         # -----------------------------------
         # Externally unconfigurable variables
