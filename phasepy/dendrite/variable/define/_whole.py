@@ -48,7 +48,7 @@ class WholeVal():
         self.prop_val: PropVal = PropVal(material_property=material_property, xsize=self.simu_val.xsize, ysize=self.simu_val.ysize)
         self.cell_val: CellVal = CellVal(xmax=self.simu_val.xmax, ymax=self.simu_val.ymax)
 
-        if self.__class_name == SimulationModelKey.DENDRITE.CENTER[SimulationModelKey.CLASS_NAME]:
+        if self.__class_name == SimulationModelKey.DENDRITE.ROUND_CENTER[SimulationModelKey.CLASS_NAME]:
             self.model_val = CenterModel(model_parameter=model_parametr)
 
     @property

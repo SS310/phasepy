@@ -32,7 +32,7 @@ class InitField():
 
 
     class Phase():
-        def center(simu_val: SimuVal, cell_val: CellVal, model_val: CenterModel) -> any:
+        def round_center(simu_val: SimuVal, cell_val: CellVal, model_val: CenterModel) -> any:
             """
             Set initial conditions of phase field variable for **Center** model
             """

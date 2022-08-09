@@ -11,7 +11,7 @@ See Also
 import os
 
 #********** Import original module **********
-from phasepy.dendrite.main.center import Center
+from phasepy.dendrite.main.round_center import RoundCenter
 from phasepy._const import PathConst
 from phasepy.dendrite.variable.update._energy import PhaseEnergy
 from phasepy.dendrite.variable.update._field import UpdateFeild
@@ -21,7 +21,7 @@ from phasepy.dendrite.variable.init._field import InitField
 
 #********** Class **********
 
-class Center(Center):
+class RoundCenter(RoundCenter):
     def __init__(self) -> None:
         super().__init__()
 
@@ -38,7 +38,7 @@ class Center(Center):
         self._update_field()
 
     def test_update_phase(self):
-        InitField.Phase.center(simu_val=self.whole_val.simu_val, cell_val=self.whole_val.cell_val, model_val=self.whole_val.model_val)
+        InitField.Phase.round_center(simu_val=self.whole_val.simu_val, cell_val=self.whole_val.cell_val, model_val=self.whole_val.model_val)
 
     def test_update_tem(self):
         InitField.Temperture.center(simu_val=self.whole_val.simu_val, prop_val=self.whole_val.prop_val, cell_val=self.whole_val.cell_val)

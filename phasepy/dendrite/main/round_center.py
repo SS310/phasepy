@@ -17,7 +17,7 @@ from ._base import Base
 
 #********** Class **********
 
-class Center(Base):
+class RoundCenter(Base):
     def __init__(self) -> None:
         super().__init__()
 
