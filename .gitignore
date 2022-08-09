@@ -167,7 +167,7 @@ cython_debug/
 !doc/**/*.ipynb
 !doc/**/*.png
 
-!data/*.png
+!data/**/*.png
 
 output/
 input/**/*.yaml
