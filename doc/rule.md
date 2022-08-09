@@ -160,7 +160,7 @@ See Also)
 |fix|Bug fixes|
 |hotfix|Critical bug fixes|
 |add|Add new files / functions|
-|update|Non-bug feature fixes|
+|refactor|A code change that neither fixes a bug nor adds a feature|
 |change|Specification Change|
 |clean|Organizing / Refactoring|
 |disable|Disable / Comment-out|
@@ -183,8 +183,8 @@ Template)
 
 ## What we did.
 
-- [x] : Aready done.
-- [ ] : Doing now or feature.
+- [x] Aready done.
+- [ ] Doing now or feature.
 
 ## How to use
 
