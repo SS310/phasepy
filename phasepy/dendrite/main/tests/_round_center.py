@@ -28,7 +28,7 @@ class RoundCenter(RoundCenter):
     def test_set(self):
         """
         """
-        input_path = os.path.join(PathConst.DENDRITE.DATA, "Center", "format.yaml")
+        input_path = os.path.join(PathConst.DENDRITE.DATA, "RoundCenter", "format.yaml")
         self.set_input_path(input_path=input_path)
         self.whole_val.set()
 

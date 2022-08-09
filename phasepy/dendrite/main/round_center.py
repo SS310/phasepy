@@ -23,7 +23,7 @@ class RoundCenter(Base):
 
     def main(self):
         """
-        Start **Center** model simulation
+        Start **RoundCenter** model simulation
 
         See Also
         --------

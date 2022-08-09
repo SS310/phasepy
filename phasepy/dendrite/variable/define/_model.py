@@ -17,7 +17,7 @@ from numba import types, typed
 #********** Constant Value **********
 
 
-__all__ = ["CenterModel"]
+__all__ = ["RoundCenterModel"]
 
 #********** Class **********
 # ----------------------------------------------------------
@@ -27,13 +27,13 @@ spec1 = [
     ('nucleus_state', types.f8),
 ]
 @jitclass(spec=spec1)
-class CenterModel():
+class RoundCenterModel():
     """
     Variable about using only **Center** simulation
     """
     def __init__(self, model_parameter: typed.Dict) -> None:
         """
-        Variable about using only **Center** simulation
+        Variable about using only **RoundCenter** simulation
         """
         # Externally configurable variables
         """
