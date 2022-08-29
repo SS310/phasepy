@@ -39,4 +39,4 @@ class InitField():
             for x in range(simu_val.xmax):
                 for y in range(simu_val.ymax):
                     if simu_val.rad[x,y] <= model_val.nucleus_size:
-                        cell_val.phase_f[y, x] = model_val.nucleus_state
+                        cell_val.phase_f[x,y] = model_val.nucleus_state
