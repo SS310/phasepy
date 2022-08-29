@@ -16,6 +16,7 @@ import math
 
 #********** Import orizinal module **********
 from phasepy.tools._xytools import xy_pm, xy_rad
+from phasepy._const import MathConst
 
 #********** Constant Value **********
 
@@ -110,6 +111,7 @@ spec2 = [
     ('supercool_tem', types.f8),
     ('nois', types.f8),
     ('grow_direct', types.f8),
+    ('grow_sita', types.f8),
     ('inter_w', types.f8),
     ('inter_coef', types.f8),
     ('grad_coef', types.f8),
@@ -167,6 +169,8 @@ class PropVal():
 
         # -----------------------------------
         # Externally unconfigurable variables
+        self.grow_sita: types.f8 = (self.grow_direct/360)*(2.0*MathConst.PI)
+        """Anisotropic growth direction (normal angle from x-axis, expressed as 0 ~ π/2)"""
         self.inter_w: types.f8 = self.inter_w_coef*((xsize+ysize)/2.0)
         """Interface width"""
         self.inter_coef: types.f8 = 2.0*math.log((1.0+(1.0-2.0*self.lam))/(1.0-(1.0-2.0*self.lam)))/2.0
