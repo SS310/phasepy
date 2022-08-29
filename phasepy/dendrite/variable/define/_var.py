@@ -109,6 +109,7 @@ spec2 = [
     ('anis_str', types.f8),
     ('supercool_tem', types.f8),
     ('nois', types.f8),
+    ('grow_direct', types.f8),
     ('inter_w', types.f8),
     ('inter_coef', types.f8),
     ('grad_coef', types.f8),
@@ -160,6 +161,8 @@ class PropVal():
         """Supercooling temperture""" # default=1511.2, unit=K
         self.nois: types.f8 = types.f8(material_property["nois"])
         """Noise amplitude""" # default=0.1, unit=None
+        self.grow_direct: types.f8 = types.f8(material_property["grow_direct"])
+        """Anisotropic growth direction (normal angle from x-axis, expressed as 0 ~ 90)""" # default=0.0, unit=None
         # SETTING-MATERIAL-PROPERTY-FINISH
 
         # -----------------------------------
