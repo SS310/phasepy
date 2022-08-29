@@ -86,15 +86,15 @@ class PhaseEnergy():
                     dyy_p = (cell_val.phase_f[x,simu_val.yp[x,y]]+cell_val.phase_f[x,simu_val.ym[x,y]]-2.0*cell_val.phase_f[x,y])/(simu_val.xsize*simu_val.ysize)
                     dxy_p = (cell_val.phase_f[simu_val.xp[x,y],simu_val.yp[x,y]]+cell_val.phase_f[simu_val.xm[x,y],simu_val.ym[x,y]]-cell_val.phase_f[simu_val.xp[x,y],simu_val.ym[x,y]]-cell_val.phase_f[simu_val.xm[x,y],simu_val.yp[x,y]])/(4.0*simu_val.xsize*simu_val.ysize)
                     
-                    si_ta = math.atan(dy_p/(dx_p+1.0e-20))
+                    sita = math.atan(dy_p/(dx_p+1.0e-20))
 
-                    ep = prop_val.grad_coef*(1.0+prop_val.anis_str*math.cos(prop_val.anis_num*si_ta))
-                    ep1p = -1.0*prop_val.grad_coef*prop_val.anis_str*prop_val.anis_num*math.sin(prop_val.anis_num*si_ta)
-                    ep2p = -1.0*prop_val.grad_coef*prop_val.anis_str*(prop_val.anis_num**2)*math.cos(prop_val.anis_num*si_ta)
+                    ep = prop_val.grad_coef*(1.0+prop_val.anis_str*math.cos(prop_val.anis_num*(sita-prop_val.grow_sita)))
+                    ep1p = -1.0*prop_val.grad_coef*prop_val.anis_str*prop_val.anis_num*math.sin(prop_val.anis_num*(sita-prop_val.grow_sita))
+                    ep2p = -1.0*prop_val.grad_coef*prop_val.anis_str*(prop_val.anis_num**2)*math.cos(prop_val.anis_num*(sita-prop_val.grow_sita))
 
                     cell_val.grad_drive[x,y] = (-1.0*(ep**2.0)*(dxx_p+dyy_p)-\
-                        1.0*ep*ep1p*((dyy_p-dxx_p)*math.sin(2.0*si_ta)+2.0*dxy_p*math.cos(2.0*si_ta))+\
-                        0.5*(ep1p*ep1p+ep*ep2p)*(2.0*dxy_p*math.sin(2.0*si_ta)-dxx_p-dyy_p-(dyy_p-dxx_p)*math.cos(2.0*si_ta)))
+                        1.0*ep*ep1p*((dyy_p-dxx_p)*math.sin(2.0*sita)+2.0*dxy_p*math.cos(2.0*sita))+\
+                        0.5*(ep1p*ep1p+ep*ep2p)*(2.0*dxy_p*math.sin(2.0*sita)-dxx_p-dyy_p-(dyy_p-dxx_p)*math.cos(2.0*sita)))
 
         @staticmethod
         @jit(nopython=True, parallel=True)
@@ -106,6 +106,6 @@ class PhaseEnergy():
                 for y in prange(simu_val.ymax):
                     dx_p = (cell_val.phase_f[simu_val.xp[x,y],y]-cell_val.phase_f[simu_val.xm[x,y],y])/(2.0*simu_val.xsize)
                     dy_p = (cell_val.phase_f[x,simu_val.yp[x,y]]-cell_val.phase_f[x,simu_val.ym[x,y]])/(2.0*simu_val.ysize)
-                    si_ta = math.atan(dy_p/(dx_p+1.0e-20))
+                    sita = math.atan(dy_p/(dx_p+1.0e-20))
 
-                    cell_val.grad_energy[x,y] = 0.5*(prop_val.grad_coef*(1.0+prop_val.anis_str*math.cos(prop_val.anis_num*si_ta)))**2*(dx_p**2+dy_p**2)
+                    cell_val.grad_energy[x,y] = 0.5*(prop_val.grad_coef*(1.0+prop_val.anis_str*math.cos(prop_val.anis_num*(sita-prop_val.grow_sita))))**2*(dx_p**2+dy_p**2)
