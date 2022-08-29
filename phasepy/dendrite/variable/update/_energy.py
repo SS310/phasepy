@@ -9,7 +9,6 @@ See Also
 """
 
 #********** Import major pakage or module **********
-import numpy as np
 import random as rd
 import math
 from numba import jit, prange
