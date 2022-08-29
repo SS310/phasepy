@@ -9,8 +9,6 @@ See Also
 """
 
 #********** Import major pakage or module **********
-import numpy as np
-import math
 
 #********** Import orizinal module **********
 
