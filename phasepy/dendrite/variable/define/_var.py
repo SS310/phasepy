@@ -124,7 +124,7 @@ class PropVal():
     """
     Variable about physical property
     """
-    def __init__(self, material_property: typed.Dict, xsize: float, ysize: float) -> None:
+    def __init__(self, material_property: typed.Dict, xsize: float, ysize: float, PI = MathConst.PI) -> None:
         """
         Variable about physical property
         """
@@ -169,7 +169,7 @@ class PropVal():
 
         # -----------------------------------
         # Externally unconfigurable variables
-        self.grow_sita: types.f8 = (self.grow_direct/360)*(2.0*MathConst.PI)
+        self.grow_sita: types.f8 = (self.grow_direct/360)*(2.0*PI)
         """Anisotropic growth direction (normal angle from x-axis, expressed as 0 ~ π/2)"""
         self.inter_w: types.f8 = self.inter_w_coef*((xsize+ysize)/2.0)
         """Interface width"""
