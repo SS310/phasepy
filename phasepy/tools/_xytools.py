@@ -50,7 +50,7 @@ def xy_rad(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, rad: np.ndarray
             yk[x,y] = y - (ymax-1)/2.0
 
             if x == (xmax-1)/2.0 and y == (ymax-1)/2.0:
-                rad[x,y] = 1.0
+                rad[x,y] = 0.0
             else:
                 rad[x,y] = math.sqrt(xk[x,y]**2+yk[x,y]**2)
 
