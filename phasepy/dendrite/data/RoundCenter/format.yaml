@@ -85,6 +85,12 @@ material_property:
     type: types.f8
     unit: None
     value: 0.01
+  grow_direct:
+    description: Anisotropic growth direction (normal angle from x-axis, expressed
+      as 0 ~ 90)
+    type: types.f8
+    unit: None
+    value: 0.0
   inter_e:
     description: Interface energy
     type: types.f8
