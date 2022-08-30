@@ -29,7 +29,7 @@ spec1 = [
 @jitclass(spec=spec1)
 class RoundCenterModel():
     """
-    Variable about using only **Center** simulation
+    Variable about using only **RoundCenter** simulation
     """
     def __init__(self, model_parameter: typed.Dict) -> None:
         """
