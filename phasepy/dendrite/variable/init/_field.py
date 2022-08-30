@@ -20,6 +20,7 @@ from phasepy.dendrite.variable.define._model import *
 #********** Function **********
 class InitField():
     class Temperture():
+        @staticmethod
         def round_center(simu_val: SimuVal, prop_val: PropVal, cell_val: CellVal) -> None:
             """
             Set initial conditions of temperture field for **RoundCenter** model
@@ -30,6 +31,7 @@ class InitField():
 
 
     class Phase():
+        @staticmethod
         def round_center(simu_val: SimuVal, cell_val: CellVal, model_val: RoundCenterModel) -> any:
             """
             Set initial conditions of phase field variable for **RoundCenter** model
