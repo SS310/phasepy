@@ -163,6 +163,8 @@ cython_debug/
 #Adding
 *.ipynb
 *.png
+*.txt
+*.yaml
 
 !doc/**/*.ipynb
 !doc/**/*.png
