@@ -67,7 +67,7 @@ class InputFileFmt():
         self.SIMULATE = [
             "# ============================================================\n",
             "# ============================================================\n",
-            "# Please set material property according to above discription.\n",
+            "# Please set simulation parameter according to above discription.\n",
             "# ============================================================\n",
         ]
         self.MODEL = [

@@ -37,7 +37,7 @@ model_parameter:
     value: 0.9
 # ============================================================
 # ============================================================
-# Please set material property according to above discription.
+# Please set simulation parameter according to above discription.
 # ============================================================
 simulation_parameter:
   maxstep:
