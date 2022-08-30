@@ -21,7 +21,7 @@ __all__ = ["RoundCenterModel"]
 
 #********** Class **********
 # ----------------------------------------------------------
-# spec1 is type-list of CenterModel for the jitclass
+# spec1 is type-list of RoundCenterModel for the jitclass
 spec1 = [
     ('nucleus_size', types.f8),
     ('nucleus_state', types.f8),
