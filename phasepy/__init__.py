@@ -6,7 +6,7 @@ import phasepy.dendrite.main as dendrite
 #import phasepy.martensite.main as martensite
 #import phasepy.fsma.main as fsma
 
-from phasepy.tools.input._input import FmtFile
+from phasepy.tools.input.useful import InputTools
 
 __version__ = "0.1.0"
 __doc__ = """
