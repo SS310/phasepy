@@ -139,6 +139,10 @@ class SimulationModelKey():
             """   
             self.PATH = PathConst.MARTENSITE
             """PATH for martensite simulation"""
+            self.TOWARD_STABLE = {
+                CLASS_NAME: "TowardStable",
+                DESCRIPTION: "This is a simulation of basic martensitic transformation from a random state to a stable state."
+            }
     
     DENDRITE = __Dendrite(CLASS_NAME=CLASS_NAME, DESCRIPTION=DESCRIPTION)
     """Key of dendrite simulation model """
