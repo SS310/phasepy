@@ -14,7 +14,7 @@ import os
 from phasepy.dendrite.main.round_center import RoundCenter
 from phasepy._const import PathConst
 from phasepy.dendrite.variable.update._energy import PhaseEnergy
-from phasepy.dendrite.variable.update._field import UpdateFeild
+from phasepy.dendrite.variable.update._field import UpdateField
 from phasepy.dendrite.variable.init._field import InitField
 
 #********** Constant Value **********

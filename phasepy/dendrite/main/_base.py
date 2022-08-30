@@ -17,7 +17,7 @@ from phasepy._const import SetPathKey, SimulationModelKey
 from phasepy.dendrite._const import OutputDir
 from phasepy.tools._save import SaveTools
 from phasepy.dendrite.variable.update._energy import PhaseEnergy
-from phasepy.dendrite.variable.update._field import UpdateFeild
+from phasepy.dendrite.variable.update._field import UpdateField
 from phasepy.dendrite.variable.init._field import InitField
 
 #********** Constant Value **********
@@ -132,8 +132,8 @@ class Base():
         PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)    
 
     def _update_field(self) -> None:
-        UpdateFeild.tem_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        UpdateFeild.phase_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        UpdateField.tem_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        UpdateField.phase_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
 
     def _init_field(self) -> None:
         if self.__class__.__name__ == SimulationModelKey.DENDRITE.ROUND_CENTER[SimulationModelKey.CLASS_NAME]:
