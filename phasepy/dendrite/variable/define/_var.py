@@ -35,8 +35,8 @@ spec1 = [
     ('xm', types.i4[:,:]),
     ('yp', types.i4[:,:]),
     ('ym', types.i4[:,:]),
-    ('xk', types.f4[:,:]),
-    ('yk', types.f4[:,:]),
+    ('xr', types.f4[:,:]),
+    ('yr', types.f4[:,:]),
     ('rad', types.f4[:,:]),
 ]
 @jitclass(spec=spec1)
@@ -83,17 +83,17 @@ class SimuVal():
         """Array of y+1"""
         self.ym: np.ndarray = np.copy(i4_xy)
         """Array of y-1"""
-        self.xk: np.ndarray = np.copy(f4_xy)
-        """Array of abs(x-xmax/2)"""
-        self.yk: np.ndarray = np.copy(f4_xy)
-        """Array of abs(y-ymax/2)""" 
+        self.xr: np.ndarray = np.copy(f4_xy)
+        """Array of x-(xmax-1)/2"""
+        self.yr: np.ndarray = np.copy(f4_xy)
+        """Array of y-(ymax-1)/2""" 
         self.rad: np.ndarray = np.copy(f4_xy)
         """Array of radius"""
 
         # ---------------------
         # Calculating Variables
         (self.xp, self.xm, self.yp, self.ym) = xy_pm(xmax=self.xmax, ymax=self.ymax, xp=self.xp, xm=self.xm, yp=self.yp, ym=self.ym)
-        (self.xk, self.yk, self.rad) = xy_rad(xmax=self.xmax, ymax=self.ymax, xk=self.xk, yk=self.yk, rad=self.rad)      
+        (self.xr, self.yr, self.rad) = xy_rad(xmax=self.xmax, ymax=self.ymax, xr=self.xr, yr=self.yr, rad=self.rad)      
 
 # ----------------------------------------------------------
 # spec2 is type-list of PropertyVal for the jitclass
