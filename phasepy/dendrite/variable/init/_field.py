@@ -11,11 +11,10 @@ See Also
 #********** Import major pakage or module **********
 
 #********** Import orizinal module **********
-
-
-#********** Constant Value **********
 from phasepy.dendrite.variable.define._var import SimuVal, PropVal, CellVal
 from phasepy.dendrite.variable.define._model import *
+
+#********** Constant Value **********
 
 #********** Function **********
 class InitField():
