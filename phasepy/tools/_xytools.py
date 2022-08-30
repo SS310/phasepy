@@ -90,6 +90,8 @@ def xy_four(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, nxx: np.ndarra
                 yk[x,y] = y-xmax
 
             alnn = math.sqrt(xk[x,y]*xk[x,y]+yk[x,y]*yk[x,y])
+            if alnn == 0.0:
+                alnn = 1.0
 
             nxx[x,y] = (xk[x,y]/alnn)*(xk[x,y]/alnn)
             nyy[x,y] = (yk[x,y]/alnn)*(yk[x,y]/alnn)
