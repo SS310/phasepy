@@ -138,7 +138,7 @@ class Base():
     def _init_field(self) -> None:
         if self.__class__.__name__ == SimulationModelKey.DENDRITE.ROUND_CENTER[SimulationModelKey.CLASS_NAME]:
             InitField.Phase.round_center(simu_val=self.__whole_val.simu_val, cell_val=self.__whole_val.cell_val, model_val=self.__whole_val.model_val)
-            InitField.Temperture.center(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+            InitField.Temperture.round_center(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         # Energy calculations in the initial field
         self._calc_energy()
 
