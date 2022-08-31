@@ -169,7 +169,7 @@ class PropVal():
 
         # -----------------------------------
         # Externally unconfigurable variables
-        self.c_12 = self.c_11 + 2.0*self.c_44
+        self.c_11 = self.c_12 + 2.0*self.c_44
 
         self.nu0: types.f8 = self.c_12/(2.0*(self.c_12+self.c_44))
         """Poisson's ratio"""
