@@ -254,7 +254,7 @@ class CellVal():
         self.elas_energy: np.ndarray  = np.zeros((xmax,ymax,2))
         """Elastic energy of metal structure""" # default=False, unit=bool
         self.ep_eigen: np.ndarray = np.zeros((xmax,ymax,3,3))
-        """Eigen strain (metamorphosis + magnetic-moment)""" # default=False, unit=bool
+        """Eigen strain""" # default=False, unit=bool
         self.ep_eigen_ave: np.ndarray = np.zeros((3,3))
         """Average of eigen strain""" # default=False, unit=bool
         self.ep_ex: np.ndarray = np.zeros((3,3))
