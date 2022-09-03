@@ -138,9 +138,9 @@ class Base():
         PhaseEnergy.Chemical.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.Gradient.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.Elastic.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        #PhaseEnergy.Chemical.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        #PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        #PhaseEnergy.Elastic.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)  
+        PhaseEnergy.Chemical.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        PhaseEnergy.Elastic.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)  
 
     def _update_field(self) -> None:
         UpdateField.phase_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
