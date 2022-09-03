@@ -20,7 +20,7 @@ class InitField():
     def toward_center(simu_val: SimuVal, cell_val: CellVal) -> None:
         # Create random metal structure
         _Phase.rand(simu_val=simu_val, cell_val=cell_val)
-        print("Random metal structure variable were successfully created. ->", end="")
+        print("Random metal structure variable were successfully created. -> ", end="")
 
 
 #********** Internal function **********
