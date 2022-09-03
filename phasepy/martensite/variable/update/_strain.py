@@ -112,9 +112,10 @@ class Strain():
         - The value is updated, so no return value is needed.
         - Shifted to the center
         """ 
-        for i in range(2):
-            # Inverse fourie transform and center shift
-            cell_val.ep_hetero[:,:,i] = np.real(np.fft.ifft2(cell_val.ep_hetero_four[:,:,i]))
+        for i in range(3):
+            for j in range(3):
+                # Inverse fourie transform and center shift
+                cell_val.ep_hetero[:,:,i,j] = np.real(np.fft.ifft2(cell_val.ep_hetero_four[:,:,i,j]))
 
     # ----------------------------------------------------------------------------
     @staticmethod
@@ -134,7 +135,7 @@ class Strain():
 
         See Also
         --------
-        - If you call this function, values of < ep_eigen > is calculated and updated.
+        - If you call this function, values of < ep_eigen, ep_eigen_grad > is calculated and updated.
         - The value is updated, so no return value is needed.
         - Use jit (parallel computation).
         """ 
@@ -144,6 +145,7 @@ class Strain():
                 for x in prange(simu_val.xmax):
                     for y in prange(simu_val.ymax):
                         cell_val.ep_eigen[x,y,i,j] = prop_val.ep_phase[i,j,0]*cell_val.phase_f[x,y,0]+prop_val.ep_phase[i,j,1]*cell_val.phase_f[x,y,1]
+
 
     # ----------------------------------------------------------------------------
     @staticmethod
@@ -176,7 +178,7 @@ class Strain():
                 # Calculation of the imaginary part
                 imag_data = 1.0j*((simu_val.nxx[x,y]*(2.0*(1.0-prop_val.nu0)-simu_val.nxx[x,y]-prop_val.nu0/(1.0-prop_val.nu0)*simu_val.nyy[x,y])/(1.0-2.0*prop_val.nu0))*np.imag(cell_val.ep_eigen_four[x,y,0,0]) 
                             + (simu_val.nxx[x,y]*(2.0*prop_val.nu0-simu_val.nyy[x,y]-prop_val.nu0/(1.0-prop_val.nu0)*simu_val.nxx[x,y])/(1.0-2.0*prop_val.nu0))*np.imag(cell_val.ep_eigen_four[x,y,1,1]))
-                cell_val.ep_hetero_four[x,y,0] = real_data + imag_data
+                cell_val.ep_hetero_four[x,y,0,0] = real_data + imag_data
 
                 # Calculation of the real part
                 real_data = ((simu_val.nyy[x,y]*(2.0*prop_val.nu0-simu_val.nxx[x,y]-prop_val.nu0/(1.0-prop_val.nu0)*simu_val.nyy[x,y])/(1.0-2.0*prop_val.nu0))*np.real(cell_val.ep_eigen_four[x,y,0,0])
@@ -184,4 +186,4 @@ class Strain():
                 # Calculation of the imaginary part
                 imag_data = 1.0j*((simu_val.nyy[x,y]*(2.0*prop_val.nu0-simu_val.nxx[x,y]-prop_val.nu0/(1.0-prop_val.nu0)*simu_val.nyy[x,y])/(1.0-2.0*prop_val.nu0))*np.imag(cell_val.ep_eigen_four[x,y,0,0])
                             + (simu_val.nyy[x,y]*(2.0*(1.0-prop_val.nu0)-simu_val.nyy[x,y]-prop_val.nu0/(1.0-prop_val.nu0)*simu_val.nxx[x,y])/(1.0-2.0*prop_val.nu0))*np.imag(cell_val.ep_eigen_four[x,y,1,1]))
-                cell_val.ep_hetero_four[x,y,1] = real_data + imag_data
+                cell_val.ep_hetero_four[x,y,1,1] = real_data + imag_data
