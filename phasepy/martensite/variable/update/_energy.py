@@ -41,10 +41,14 @@ class PhaseEnergy():
         @staticmethod
         @jit(nopython=True, parallel=True)
         def calc_drive(simu_val: SimuVal ,prop_val: PropVal, cell_val: CellVal) -> None:
-            for x in prange(simu_val.xmax):
-                for y in prange(simu_val.ymax):
-                    for pf in prange(2):
-                        cell_val.elas_drive[x,y,pf] = ((cell_val.ep_eigen[x,y,0,0]-cell_val.ep_eigen_ave[0,0]-cell_val.ep_hetero[x,y,0]-cell_val.ep_ex[0,0])*\
-                                                    (prop_val.c_11*prop_val.ep_phase[0,0,pf]+prop_val.c_12*prop_val.ep_phase[1,1,pf])+\
-                                                    (cell_val.ep_eigen[x,y,1,1]-cell_val.ep_eigen_ave[1,1]-cell_val.ep_hetero[x,y,1]-cell_val.ep_ex[1,1])*\
-                                                    (prop_val.c_11*prop_val.ep_phase[1,1,pf]+prop_val.c_12*prop_val.ep_phase[0,0,pf]))
+            cell_val.elas_drive[:,:,:] = 0.0
+            for i in prange(3):
+                for j in prange(3):               
+                    for k in prange(3):
+                        for l in prange(3):
+                            for pf in prange(2):
+                                for x in prange(simu_val.xmax):
+                                    for y in prange(simu_val.ymax):
+                                        cell_val.elas_drive[x,y,pf] += 0.5*prop_val.c_matrix[simu_val.elas_c[i,j],simu_val.elas_c[k,l]]*(cell_val.ep_eigen[x,y,i,j]-cell_val.ep_eigen_ave[i,j]-cell_val.ep_hetero[x,y,i,j]-cell_val.ep_ex[i,j])*prop_val.ep_phase[k,l,pf]
+                                        cell_val.elas_drive[x,y,pf] += 0.5*prop_val.c_matrix[simu_val.elas_c[i,j],simu_val.elas_c[k,l]]*(cell_val.ep_eigen[x,y,k,l]-cell_val.ep_eigen_ave[k,l]-cell_val.ep_hetero[x,y,k,l]-cell_val.ep_ex[k,l])*prop_val.ep_phase[i,j,pf]
+                        
