@@ -8,6 +8,7 @@ See Also
 """
 
 #********** Import major pakage or module **********
+from tkinter import E
 import numpy as np
 from numba.experimental import jitclass
 from numba import types, typed
@@ -40,13 +41,14 @@ spec1 = [
     ('yk', types.f4[:,:]),
     ('nxx', types.f4[:,:]),
     ('nyy', types.f4[:,:]),
+    ('elas_c', types.i4[:,:]),
 ]
 @jitclass(spec=spec1)
 class SimuVal():
     """
     Variable about basical simulation parameter
     """
-    def __init__(self, simulation_parameter: typed.Dict, i4_xy: np.ndarray, f4_xy: np.ndarray) -> None:
+    def __init__(self, simulation_parameter: typed.Dict, i4_xy: np.ndarray, f4_xy: np.ndarray, i4_33: np.ndarray) -> None:
         """
         Variable about simulation basic parameter
         """
@@ -101,6 +103,15 @@ class SimuVal():
         """Special variables for fourier transform"""
         self.nyy: np.ndarray = np.copy(f4_xy)
         """Special variables for fourier transform"""
+        self.elas_c: np.ndarray = np.copy(i4_33)
+        """Special variables for elastic tensor"""
+
+        for i in range(3):
+            for j in range(3):
+                if i == j:
+                    self.elas_c[i,j] = i
+                else:
+                    self.elas_c[i,j] = 6-(i+j)
 
         # ---------------------
         # Calculating Variables
@@ -128,6 +139,8 @@ spec2 = [
     ('k_s2', types.f4),
     ('k_s3', types.f4),
     ('k_s4', types.f4),
+    ('c_matrix', types.f8[:,:]),
+    ('s_matrix', types.f8[:,:]),
 ]
 @jitclass(spec=spec2)
 class PropVal():
@@ -173,12 +186,6 @@ class PropVal():
 
         self.nu0: types.f8 = self.c_12/(2.0*(self.c_12+self.c_44))
         """Poisson's ratio"""
-        self.s_11: types.f8 = (self.c_12+self.c_44)/self.c_44/(3.0*self.c_12+2.0*self.c_44)
-        """Elastic compliance tensor coefficient of cubic crystal"""
-        self.s_12: types.f8 = -0.5*self.c_12/self.c_44/(3.0*self.c_12+2.0*self.c_44)
-        """Elastic compliance tensor coefficient of cubic crystal"""
-        self.s_44: types.f8 = 1.0/self.c_44
-        """Elastic compliance tensor coefficient of cubic crystal"""
         self.ep_phase: np.ndarray = np.zeros((3,3,2))
         """Metamorphic strain"""
 
@@ -195,7 +202,32 @@ class PropVal():
         self.ep_phase[1,1,0] = self.ep_phase[2,2,0] = self.phase_strain/2.0
 
         self.ep_phase[1,1,1] = -1.0*self.phase_strain
-        self.ep_phase[0,0,1] = self.ep_phase[2,2,0] = self.phase_strain/2.0
+        self.ep_phase[0,0,1] = self.ep_phase[2,2,1] = self.phase_strain/2.0
+
+        self.c_matrix: np.ndarray = np.zeros((6,6))
+        """Elastic tensor coefficient of cubic crystal"""
+        self.s_matrix: np.ndarray = np.zeros((6,6))
+        """Elastic compliance tensor coefficient of cubic crystal"""
+
+        for i in range(6):
+            for j in range(6):
+                if i == j:
+                    if (i == 0) or  (i == 1) or (i == 2):
+                        self.c_matrix[i,j] = self.c_11
+                    else:
+                        self.c_matrix[i,j] = self.c_44
+                elif (i <= 2) and (j <= 2):
+                    self.c_matrix[i,j] = self.c_12
+            
+        self.s_matrix = np.linalg.inv(self.c_matrix)
+
+        self.s_11: types.f8 = self.s_matrix[0,0]
+        """Elastic compliance tensor coefficient of cubic crystal"""
+        self.s_12: types.f8 = self.s_matrix[0,1]
+        """Elastic compliance tensor coefficient of cubic crystal"""
+        self.s_44: types.f8 = self.s_matrix[3,3]
+        """Elastic compliance tensor coefficient of cubic crystal"""
+
 
 # ----------------------------------------------------------
 # spec3 is type-list of CellVal for the jitclass
@@ -210,9 +242,9 @@ spec3 = [
     ('ep_eigen', types.f8[:,:,:,:]),
     ('ep_eigen_ave', types.f8[:,:]),
     ('ep_ex', types.f8[:,:]),
-    ('ep_hetero', types.f8[:,:,:]),
+    ('ep_hetero', types.f8[:,:,:,:]),
     ('ex_stress', types.f8[:,:]),
-    ('ep_hetero_four', types.c16[:,:,:]),
+    ('ep_hetero_four', types.c16[:,:,:,:]),
     ('ep_eigen_four', types.c16[:,:,:,:]),
     ('drive_four', types.c16[:,:,:]),
     ('phase_four', types.c16[:,:,:]),
@@ -259,7 +291,7 @@ class CellVal():
         """Average of eigen strain""" # default=False, unit=bool
         self.ep_ex: np.ndarray = np.zeros((3,3))
         """Strain due to external stress""" # default=False, unit=bool
-        self.ep_hetero: np.ndarray = np.zeros((xmax,ymax,2))
+        self.ep_hetero: np.ndarray = np.zeros((xmax,ymax,3,3))
         """Heterogeneous strain""" # default=False, unit=bool
         self.ex_stress: np.ndarray = np.zeros((3,3))
         """External stress""" # default=False, unit=bool
@@ -267,7 +299,7 @@ class CellVal():
 
         # -------------------------------------------------
         # Variables required during the calculation process
-        self.ep_hetero_four: np.ndarray = np.copy(c16_xy2)
+        self.ep_hetero_four: np.ndarray = np.copy(c16_xy33)
         """Heterogeneous strain in fourie space"""
         self.ep_eigen_four: np.ndarray = np.copy(c16_xy33)
         """Eigen strain in fourie space"""
