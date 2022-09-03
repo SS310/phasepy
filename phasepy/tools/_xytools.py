@@ -43,15 +43,57 @@ def xy_pm(xmax: int, ymax: int, xp: np.ndarray, xm: np.ndarray, yp: np.ndarray, 
     return (xp, xm, yp, ym)
 
 @jit(nopython=True)
-def xy_rad(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, rad: np.ndarray) -> tuple:
+def xy_rad(xmax: int, ymax: int, xr: np.ndarray, yr: np.ndarray, rad: np.ndarray) -> tuple:
     for x in range(xmax):
         for y in range(ymax):
-            xk[x,y] = x - (xmax-1)/2.0
-            yk[x,y] = y - (ymax-1)/2.0
+            xr[x,y] = x - (xmax-1)/2.0
+            yr[x,y] = y - (ymax-1)/2.0
 
             if x == (xmax-1)/2.0 and y == (ymax-1)/2.0:
                 rad[x,y] = 0.0
             else:
-                rad[x,y] = math.sqrt(xk[x,y]**2+yk[x,y]**2)
+                rad[x,y] = math.sqrt(xr[x,y]**2+yr[x,y]**2)
 
-    return (xk, yk, rad)
+    return (xr, yr, rad)
+
+@jit(nopython=True)
+def xy_four(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, nxx: np.ndarray, nyy: np.ndarray) -> tuple:
+    """
+    Able to compute Fourier coordinates
+    
+    See Also
+    --------
+    In numpy, wavenumbers in fourier space is treated in comparison to real space coordinates as follows
+
+    - Odd number
+
+    | Real  | 0| 1| 2| 3| 4|
+    |-------|--|--|--|--|--|
+    |Fourier| 0| 1| 2|-2|-1|
+    
+    - Even number
+
+    | Real  | 0| 1| 2| 3| 4| 5|
+    |-------|--|--|--|--|--|--|
+    |Fourier| 0| 1| 2| 3|-2|-1|
+    """
+    for x in range(xmax):
+        for y in range(ymax):
+            if x <= xmax/2.0:
+                xk[x,y] = x
+            else:
+                xk[x,y] = x-xmax
+            
+            if y <= ymax/2.0:
+                yk[x,y] = y
+            else:
+                yk[x,y] = y-xmax
+
+            alnn = math.sqrt(xk[x,y]*xk[x,y]+yk[x,y]*yk[x,y])
+            if alnn == 0.0:
+                alnn = 1.0
+
+            nxx[x,y] = (xk[x,y]/alnn)*(xk[x,y]/alnn)
+            nyy[x,y] = (yk[x,y]/alnn)*(yk[x,y]/alnn)
+
+    return (xk, yk, nxx, nyy)

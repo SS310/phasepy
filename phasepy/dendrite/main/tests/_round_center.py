@@ -14,7 +14,7 @@ import os
 from phasepy.dendrite.main.round_center import RoundCenter
 from phasepy._const import PathConst
 from phasepy.dendrite.variable.update._energy import PhaseEnergy
-from phasepy.dendrite.variable.update._field import UpdateFeild
+from phasepy.dendrite.variable.update._field import UpdateField
 from phasepy.dendrite.variable.init._field import InitField
 
 #********** Constant Value **********
@@ -41,7 +41,7 @@ class RoundCenter(RoundCenter):
         InitField.Phase.round_center(simu_val=self.whole_val.simu_val, cell_val=self.whole_val.cell_val, model_val=self.whole_val.model_val)
 
     def test_update_tem(self):
-        InitField.Temperture.center(simu_val=self.whole_val.simu_val, prop_val=self.whole_val.prop_val, cell_val=self.whole_val.cell_val)
+        InitField.Temperture.round_center(simu_val=self.whole_val.simu_val, prop_val=self.whole_val.prop_val, cell_val=self.whole_val.cell_val)
 
     def test_calc_chem_drive(self):
         PhaseEnergy.Chemical.calc_drive(simu_val=self.whole_val.simu_val, prop_val=self.whole_val.prop_val, cell_val=self.whole_val.cell_val)

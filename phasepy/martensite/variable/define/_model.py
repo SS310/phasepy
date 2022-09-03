@@ -2,7 +2,6 @@
 Summary
 -------
 
-
 See Also
 --------
 
@@ -17,23 +16,21 @@ from numba import types, typed
 #********** Constant Value **********
 
 
-__all__ = ["RoundCenterModel"]
+__all__ = ["TowardStableModel"]
 
 #********** Class **********
 # ----------------------------------------------------------
-# spec1 is type-list of RoundCenterModel for the jitclass
+# spec1 is type-list of TowardStableModel for the jitclass
 spec1 = [
-    ('nucleus_size', types.f8),
-    ('nucleus_state', types.f8),
 ]
 @jitclass(spec=spec1)
-class RoundCenterModel():
+class TowardStableModel():
     """
-    Variable about using only **RoundCenter** simulation
+    Variable about using only **TowardStable** simulation
     """
     def __init__(self, model_parameter: typed.Dict) -> None:
         """
-        Variable about using only **RoundCenter** simulation
+        Variable about using only **TowardStable** simulation
         """
         # Externally configurable variables
         """
@@ -45,20 +42,11 @@ class RoundCenterModel():
         - default is the initial value of variable        
         - unit is physical units
         """
-        # SETTING-RoundCenter-START
-        self.nucleus_size: types.f8 = types.f8(model_parameter["nucleus_size"])
-        """Initial nucleus radius (number of cells)""" # default=10, unit=None
-        self.nucleus_state: types.f8 = types.f8(model_parameter["nucleus_state"])
-        """Phase field variable value of the initial nucleus (0~1)""" # default=0.9, unit=None
-        # SETTING-RoundCenter-FINISH
+        # SETTING-TowardStable-START
+        # SETTING-TowardStable-FINISH
         
         # -----------------------------------
         # Externally unconfigurable variables
 
         # ---------------------
         # Calculating Variables 
-        if self.nucleus_state > 1.0:
-            self.nucleus_state = 1.0
-        elif self.nucleus_state < 0.0:
-            self.nucleus_state = 0.0
-

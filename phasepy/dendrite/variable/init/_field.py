@@ -11,16 +11,16 @@ See Also
 #********** Import major pakage or module **********
 
 #********** Import orizinal module **********
-
-
-#********** Constant Value **********
 from phasepy.dendrite.variable.define._var import SimuVal, PropVal, CellVal
 from phasepy.dendrite.variable.define._model import *
+
+#********** Constant Value **********
 
 #********** Function **********
 class InitField():
     class Temperture():
-        def center(simu_val: SimuVal, prop_val: PropVal, cell_val: CellVal) -> None:
+        @staticmethod
+        def round_center(simu_val: SimuVal, prop_val: PropVal, cell_val: CellVal) -> None:
             """
             Set initial conditions of temperture field for **RoundCenter** model
             """
@@ -30,6 +30,7 @@ class InitField():
 
 
     class Phase():
+        @staticmethod
         def round_center(simu_val: SimuVal, cell_val: CellVal, model_val: RoundCenterModel) -> any:
             """
             Set initial conditions of phase field variable for **RoundCenter** model

@@ -3,28 +3,30 @@ Summary
 -------
 
 See Also
-----------
+--------
 
 """
 
 #********** Import major pakage or module **********
 import sys
 
-#********** Import original module **********
-from phasepy.dendrite.variable.define._whole import WholeVal
+#********** Import orizinal module **********
+from phasepy.martensite.variable.define._whole import WholeVal
 from phasepy.tools._path import PathTools, Counter
 from phasepy._const import SetPathKey, SimulationModelKey
-from phasepy.dendrite._const import OutputDir
+from phasepy.martensite._const import OutputDir
 from phasepy.tools._save import SaveTools
-from phasepy.dendrite.variable.update._energy import PhaseEnergy
-from phasepy.dendrite.variable.update._field import UpdateField
-from phasepy.dendrite.variable.init._field import InitField
+from phasepy.martensite.variable.update._strain import Strain
+from phasepy.martensite.variable.update._energy import PhaseEnergy
+from phasepy.martensite.variable.update._field import UpdateField
+from phasepy.martensite.variable.init._field import InitField
 
 #********** Constant Value **********
 
 class Base():
     def __init__(self) -> None:
         self.__whole_val: WholeVal = WholeVal(class_name=self.__class__.__name__)
+
 
     def main(self) -> None:
         """
@@ -43,6 +45,7 @@ class Base():
         
         ```python
         IndexError "< " + key + " > is not yet defined." 
+        ```
         ```
         """
         print("")
@@ -71,7 +74,6 @@ class Base():
         sys.stdout.flush()
         self._save(step=0)
         print("Done")
-
 
     def set_output_path(self, output_path: str) -> None:
         """
@@ -124,21 +126,31 @@ class Base():
                     cell_val=self.__whole_val.cell_val, outimg_list=OutputDir.OUTIMG_LIST, step=step)
         SaveTools.save_arr(path_val=self.__whole_val.path_val, cell_val=self.__whole_val.cell_val, outarr_list=self.whole_val.outarr_list, step=step)
 
+    def _calc_strain(self) -> None:
+        Strain.calc_ep_eigen(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        Strain.calc_ep_eigen_four(cell_val=self.__whole_val.cell_val)
+        Strain.calc_ep_hetero_four(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        Strain.calc_ep_hetero(cell_val=self.__whole_val.cell_val)
+        Strain.calc_ep_ex(prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        Strain.calc_ep_eigen_ave(cell_val=self.__whole_val.cell_val)
+
     def _calc_energy(self) -> None:
         PhaseEnergy.Chemical.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.Gradient.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        PhaseEnergy.ThermalFluct.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        PhaseEnergy.Elastic.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.Chemical.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)    
+        PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        PhaseEnergy.Elastic.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)  
 
     def _update_field(self) -> None:
-        UpdateField.tem_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         UpdateField.phase_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
 
     def _init_field(self) -> None:
-        if self.__class__.__name__ == SimulationModelKey.DENDRITE.ROUND_CENTER[SimulationModelKey.CLASS_NAME]:
-            InitField.Phase.round_center(simu_val=self.__whole_val.simu_val, cell_val=self.__whole_val.cell_val, model_val=self.__whole_val.model_val)
-            InitField.Temperture.round_center(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        if self.__class__.__name__ == SimulationModelKey.MARTENSITE.TOWARD_STABLE[SimulationModelKey.CLASS_NAME]:
+            InitField.toward_center(simu_val=self.__whole_val.simu_val, cell_val=self.__whole_val.cell_val)
+        
+        # Strain calculations in the initial field
+        self._calc_strain()
         # Energy calculations in the initial field
         self._calc_energy()
 

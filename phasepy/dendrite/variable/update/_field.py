@@ -20,7 +20,7 @@ from phasepy.dendrite.variable.define._var import SimuVal, PropVal, CellVal
 
 #********** Function **********
 
-class UpdateFeild():
+class UpdateField():
     @staticmethod
     @jit(nopython=True, parallel=True)
     def tem_f(simu_val: SimuVal, prop_val: PropVal, cell_val: CellVal) -> None:
