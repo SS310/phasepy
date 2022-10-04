@@ -135,6 +135,26 @@ class InputTools():
                 _Tools.mk_fmtfile(fmt_path=fmt_path, input_file_fmt=input_file_fmt,
                                     simu_val=simu_val, prop_val=prop_val, cell_val=cell_val, model_val=model_val)
 
+            # FSMA simulation
+            value_path = SimulationModelKey.FSMA.PATH.VALUE
+            model_path = SimulationModelKey.FSMA.PATH.MODEL
+            for model in [SimulationModelKey.FSMA.TOWARD_STABLE]:
+                input_file_fmt = InputFileFmt(model=model)
+                stamp_format = StampFormat(model=model)
+
+                simu_val = {InputNameKey.SIMULATION_PARAMETER:_Tools.mk_setting_dict(file_path=value_path, stamp=stamp_format.SIMULATE)}
+                prop_val = {InputNameKey.MATERIAL_PROPERTY:_Tools.mk_setting_dict(file_path=value_path, stamp=stamp_format.MATERIAL)}
+                cell_val = {InputNameKey.OUTPUT_PARAMETER:_Tools.mk_setting_dict(file_path=value_path, stamp=stamp_format.OUTPUT)}
+                model_val = {InputNameKey.MODEL_PARAMETER:_Tools.mk_setting_dict(file_path=model_path, stamp=stamp_format.MODEL)}
+                
+                format_dir = os.path.join(SimulationModelKey.FSMA.PATH.DATA, model[SimulationModelKey.CLASS_NAME])
+                if os.path.exists(format_dir) == False:
+                    os.mkdir(format_dir)
+                fmt_path = os.path.join(format_dir, "format.yaml")
+
+                _Tools.mk_fmtfile(fmt_path=fmt_path, input_file_fmt=input_file_fmt,
+                                    simu_val=simu_val, prop_val=prop_val, cell_val=cell_val, model_val=model_val)
+
     # ----- Change parameters in the input file -----
     class Change():
         """
