@@ -12,7 +12,7 @@ import numpy as np
 from numba import jit, prange
 
 #********** Import orizinal module **********
-from phasepy.martensite.variable.define._var import SimuVal, PropVal, CellVal
+from phasepy.fsma.variable.define._var import SimuVal, PropVal, CellVal
 
 #********** Constant Value **********
 
@@ -135,17 +135,18 @@ class Strain():
 
         See Also
         --------
-        - If you call this function, values of < ep_eigen, ep_eigen_grad > is calculated and updated.
+        - If you call this function, values of < ep_eigen_p, ep_eigen_m, ep_eigen > is calculated and updated.
         - The value is updated, so no return value is needed.
         - Use jit (parallel computation).
         """ 
         # < prange > is used in jit's parallel computation
         for i in prange(3):
-            for j in range(3):                
+            for j in range(3):
                 for x in prange(simu_val.xmax):
                     for y in prange(simu_val.ymax):
-                        cell_val.ep_eigen[x,y,i,j] = prop_val.ep_phase[i,j,0]*cell_val.phase_f[x,y,0]+prop_val.ep_phase[i,j,1]*cell_val.phase_f[x,y,1]
-
+                        cell_val.ep_eigen_p[x,y,i,j] = prop_val.ep_phase[i,j,0]*cell_val.phase_f[x,y,0]+prop_val.ep_phase[i,j,1]*cell_val.phase_f[x,y,1]
+                        cell_val.ep_eigen_m[x,y,i,j] = 1.5*prop_val.ramda[i,j]*(cell_val.magne_f[x,y,i]*cell_val.magne_f[x,y,j]-1.0/3.0)
+                        cell_val.ep_eigen[x,y,i,j] = cell_val.ep_eigen_p[x,y,i,j] + cell_val.ep_eigen_m[x,y,i,j]
 
     # ----------------------------------------------------------------------------
     @staticmethod
