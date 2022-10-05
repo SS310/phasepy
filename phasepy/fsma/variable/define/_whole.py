@@ -42,13 +42,13 @@ class WholeVal():
         init_array: InitArray = InitArray(xmax=xmax, ymax=ymax)
         self.__outarr_list: list = mk_outarr_list(output_parameter=output_parameter)
         
-        self.simu_val: SimuVal = SimuVal(simulation_parameter=simulation_parameter, i4_xy=init_array.i4_xy, f4_xy=init_array.f4_xy, i4_33=init_array.i4_33)
-        self.prop_val: PropVal = PropVal(material_property=material_property)
-        self.cell_val: CellVal = CellVal(xmax=self.simu_val.xmax, ymax=self.simu_val.ymax, c16_xy33=init_array.c16_xy33, c16_xy2=init_array.c16_xy2)
+        self.simu_val: SimuVal = SimuVal(simulation_parameter=simulation_parameter, i4_xy=init_array.i4_xy, f4_xy=init_array.f4_xy,
+                                        i4_812=init_array.i4_812, i4_814=init_array.i4_814)
+        self.prop_val: PropVal = PropVal(material_property=material_property, xsize=self.simu_val.xsize, ysize=self.simu_val.ysize)
+        self.cell_val: CellVal = CellVal(xmax=self.simu_val.xmax, ymax=self.simu_val.ymax, c16_xy33=init_array.c16_xy33, c16_xy=init_array.c16_xy, c16_xy3=init_array.c16_xy3)
         
-        if self.__class_name == SimulationModelKey.MARTENSITE.TOWARD_STABLE[SimulationModelKey.CLASS_NAME]:
-            #self.model_val = TowardStableModel(model_parameter=model_parametr)
-            pass
+        if self.__class_name == SimulationModelKey.FSMA.TOWARD_STABLE[SimulationModelKey.CLASS_NAME]:
+            self.model_val = TowardStableModel(model_parameter=model_parametr)
 
     @property
     def outarr_list(self):
