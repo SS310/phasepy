@@ -54,9 +54,10 @@ class TowardStable(Base):
             self._calc_strain()
             self._calc_energy()
 
-            if step % int(self.whole_val.simu_val.savestep/10) == 0:
-                print("|", end="")
-                sys.stdout.flush()
+            if int(self.whole_val.simu_val.savestep/10) != 0:
+                if step % int(self.whole_val.simu_val.savestep/10) == 0:
+                    print("|", end="")
+                    sys.stdout.flush()
 
             if step % self.whole_val.simu_val.savestep == 0:
                 self._save(step=step)
