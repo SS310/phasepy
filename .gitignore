@@ -174,8 +174,12 @@ cython_debug/
 output/
 input/**/*.yaml
 input/**/.gitkeep
+input_stack/
 
 !phasepy/**/*.py
 
 poetry.lock
 test.py
+task.md
+
+!LICENSE.txt

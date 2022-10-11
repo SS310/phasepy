@@ -57,7 +57,8 @@ def xy_rad(xmax: int, ymax: int, xr: np.ndarray, yr: np.ndarray, rad: np.ndarray
     return (xr, yr, rad)
 
 @jit(nopython=True)
-def xy_four(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, nxx: np.ndarray, nyy: np.ndarray) -> tuple:
+def xy_four(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, alnn: np.ndarray,
+            nxx: np.ndarray, nyy: np.ndarray) -> tuple:
     """
     Able to compute Fourier coordinates
     
@@ -89,11 +90,11 @@ def xy_four(xmax: int, ymax: int, xk: np.ndarray, yk: np.ndarray, nxx: np.ndarra
             else:
                 yk[x,y] = y-xmax
 
-            alnn = math.sqrt(xk[x,y]*xk[x,y]+yk[x,y]*yk[x,y])
-            if alnn == 0.0:
-                alnn = 1.0
+            alnn[x,y] = math.sqrt(xk[x,y]*xk[x,y]+yk[x,y]*yk[x,y])
+            if alnn[x,y] == 0.0:
+                alnn[x,y] = 1.0
 
-            nxx[x,y] = (xk[x,y]/alnn)*(xk[x,y]/alnn)
-            nyy[x,y] = (yk[x,y]/alnn)*(yk[x,y]/alnn)
+            nxx[x,y] = (xk[x,y]/alnn[x,y])**2
+            nyy[x,y] = (yk[x,y]/alnn[x,y])**2
 
-    return (xk, yk, nxx, nyy)
+    return (xk, yk, alnn, nxx, nyy)

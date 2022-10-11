@@ -50,3 +50,7 @@ Planned Development...
 ### FSMA Simulation
 
 Planned Development...
+
+
+
+This software is released under the MIT License, see LICENSE.txt.

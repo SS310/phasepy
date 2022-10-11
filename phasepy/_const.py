@@ -68,6 +68,8 @@ class SetPathKey():
     """Key of output-path"""
     INPUT = "input_path"
     """Key of input-path"""
+    SUB = "sub"
+    """Key of counter"""
 
 class InputDataKey():
     DESCRIPTION = "description"
@@ -127,7 +129,10 @@ class SimulationModelKey():
             """   
             self.PATH = PathConst.FSMA
             """PATH for fsma simulation"""
-
+            self.TOWARD_STABLE = {
+                CLASS_NAME: "TowardStable",
+                DESCRIPTION: "This is a basic fsma simulation of stable state (No apply external variable)."
+            }
 
     class __Martensite():
         """
