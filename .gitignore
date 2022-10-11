@@ -181,3 +181,5 @@ input_stack/
 poetry.lock
 test.py
 task.md
+
+!LICENSE.txt
