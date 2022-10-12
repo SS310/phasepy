@@ -163,6 +163,16 @@ output_parameter:
     type: bool
     unit: bool
     value: false
+  dw_drive:
+    description: Double-well driving force
+    type: bool
+    unit: bool
+    value: false
+  dw_energy:
+    description: Double-well potential
+    type: bool
+    unit: bool
+    value: false
   grad_drive:
     description: Gradient driving force
     type: bool

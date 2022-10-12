@@ -47,7 +47,7 @@ class UpdateField():
         """
         for x in prange(simu_val.xmax):
             for y in prange(simu_val.ymax):
-                phase_dt = -1.0*prop_val.mob*(cell_val.tem_fluct[x,y]+cell_val.chem_drive[x,y]+cell_val.grad_drive[x,y])
+                phase_dt = -1.0*prop_val.mob*(cell_val.tem_fluct[x,y]+cell_val.chem_drive[x,y]+cell_val.grad_drive[x,y]+cell_val.dw_drive[x,y])
 
                 cell_val.phase_f[x,y] = cell_val.phase_f[x,y] + phase_dt*prop_val.delt
 
