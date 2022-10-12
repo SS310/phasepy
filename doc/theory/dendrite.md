@@ -95,7 +95,7 @@
 
 <br>
 <div align="center">
-<img src="https://latex.codecogs.com/svg.image?g\left&space;(&space;\phi&space;&space;\right&space;)&space;=&space;\phi&space;^{2}\left&space;(&space;1-\phi^{2}&space;\right&space;)" title="g\left ( \phi \right ) = \phi ^{2}\left ( 1-\phi^{2} \right )" />
+<img src="https://latex.codecogs.com/svg.image?g\left&space;(&space;\phi&space;&space;\right&space;)&space;=&space;\phi&space;^{2}\left&space;(&space;1-\phi&space;\right&space;)^{2}" title="g\left ( \phi \right ) = \phi ^{2}\left ( 1-\phi^{2} \right )" />
 </div>
 <br>
 
@@ -114,7 +114,7 @@ The following approximate formula is used here.
 
 <br>
 <div align="center">
-<img src="https://latex.codecogs.com/svg.image?\left&space;(&space;G_{sol}&space;-&space;G_{liq}&space;\right&space;)&space;=&space;\frac{-L\left&space;(&space;T_{m}&space;-&space;T&space;\right&space;)}{T}" title="\left ( G_{sol} - G_{liq} \right ) = \frac{-L\left ( T_{m} - T \right )}{T}" />
+<img src="https://latex.codecogs.com/svg.image?\left&space;(&space;G_{sol}&space;-&space;G_{liq}&space;\right&space;)&space;=&space;\frac{-L\left&space;(&space;T_{m}&space;-&space;T&space;\right&space;)}{T_{m}}" title="\left ( G_{sol} - G_{liq} \right ) = \frac{-L\left ( T_{m} - T \right )}{T_{m}}" />
 </div>
 <br>
 <div align="right">
