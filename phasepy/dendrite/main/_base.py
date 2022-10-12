@@ -19,6 +19,7 @@ from phasepy.tools._save import SaveTools
 from phasepy.dendrite.variable.update._energy import PhaseEnergy
 from phasepy.dendrite.variable.update._field import UpdateField
 from phasepy.dendrite.variable.init._field import InitField
+from phasepy.dendrite.variable.end._field import Convergence
 
 #********** Constant Value **********
 
@@ -141,6 +142,17 @@ class Base():
             InitField.Temperture.round_center(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         # Energy calculations in the initial field
         self._calc_energy()
+
+    def _convergence(self) -> int:
+        """
+        Return
+        ------
+        1 : End
+        0 : Continue
+        """
+        if self.__class__.__name__ == SimulationModelKey.DENDRITE.ROUND_CENTER[SimulationModelKey.CLASS_NAME]:
+            return Convergence.round_center(simu_val=self.__whole_val.simu_val, cell_val=self.__whole_val.cell_val, model_val=self.__whole_val.model_val)
+
 
     def __check_counter(self) -> None:
         #Counter.warning(path_val=self.__whole_val.path_val, key1=SetPathKey.MAIN)
