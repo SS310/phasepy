@@ -194,9 +194,11 @@ spec3 = [
     ('tem_f', types.f8[:,:]),
     ('chem_energy', types.f8[:,:]),
     ('grad_energy', types.f8[:,:]),
+    ('dw_energy', types.f8[:,:]),
     ('tem_fluct', types.f8[:,:]),
     ('chem_drive', types.f8[:,:]),
     ('grad_drive', types.f8[:,:]),
+    ('dw_drive', types.f8[:,:]),
 ]
 @jitclass(spec=spec3)
 class CellVal():
@@ -226,12 +228,16 @@ class CellVal():
         """Gradient energy""" # default=False, unit=bool
         self.chem_energy: np.ndarray = np.zeros((xmax,ymax))
         """Chemical energy""" # default=False, unit=bool
+        self.dw_energy: np.ndarray = np.zeros((xmax,ymax))
+        """Double-well potential""" # default=False, unit=bool
         self.tem_fluct: np.ndarray = np.zeros((xmax,ymax))
         """Thermal fluctuations""" # default=False, unit=bool
         self.grad_drive: np.ndarray = np.zeros((xmax,ymax))
         """Gradient driving force""" # default=False, unit=bool
         self.chem_drive: np.ndarray = np.zeros((xmax,ymax))
         """Chemical driving force""" # default=False, unit=bool
+        self.dw_drive: np.ndarray = np.zeros((xmax,ymax))
+        """Double-well driving force""" # default=False, unit=bool
         # SETTING-OUTPUT-PARAMETER-FINISH
 
         # -------------------------------------------------

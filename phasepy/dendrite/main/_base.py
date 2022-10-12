@@ -128,9 +128,11 @@ class Base():
     def _calc_energy(self) -> None:
         PhaseEnergy.Chemical.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.Gradient.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        PhaseEnergy.DoubleWell.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.ThermalFluct.calc_drive(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
         PhaseEnergy.Chemical.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
-        PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)    
+        PhaseEnergy.Gradient.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)
+        PhaseEnergy.DoubleWell.calc_energy(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)  
 
     def _update_field(self) -> None:
         UpdateField.tem_f(simu_val=self.__whole_val.simu_val, prop_val=self.__whole_val.prop_val, cell_val=self.__whole_val.cell_val)

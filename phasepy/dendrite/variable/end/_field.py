@@ -9,10 +9,10 @@ See Also
 """
 
 #********** Import major pakage or module **********
-from numba import jit, prange
+from numba import jit
 
 #********** Import orizinal module **********
-from phasepy.dendrite.variable.define._var import SimuVal, PropVal, CellVal
+from phasepy.dendrite.variable.define._var import SimuVal, CellVal
 from phasepy.dendrite.variable.define._model import *
 
 #********** Constant Value **********
@@ -26,7 +26,7 @@ class Convergence():
 
 class _ConvergenceTools():
     @staticmethod
-    @jit(nopython=True, parallel=True)
+    @jit(nopython=True)
     def max_growth(simu_val: SimuVal, cell_val: CellVal, max_rate: float) -> None:
         """
         Judged by the size of the maximum growth area from the center
@@ -43,8 +43,8 @@ class _ConvergenceTools():
         """
         max_distance = max_rate*(simu_val.xmax/2.0+simu_val.ymax/2.0)/2.0
 
-        for x in prange(simu_val.xmax):
-            for y in prange(simu_val.ymax):
+        for x in range(simu_val.xmax):
+            for y in range(simu_val.ymax):
                 if simu_val.rad[x,y] >= max_distance:
                     if cell_val.phase_f[x,y] >= 0.5:
                         return 1
